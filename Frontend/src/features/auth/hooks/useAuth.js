@@ -50,9 +50,9 @@ export const useAuth = () => {
     const getAndSetUser = async () => {  // fetch User
       try {
         const data = await getMe()
-        setUser(data?.user ?? null)
+        setUser(data.user)
       } catch (err) {
-        setUser(null)
+        setLoading(false)
       } finally {
         setLoading(false)
       }
