@@ -87,5 +87,22 @@ Users can specify the role they are preparing for.
 
 For example:
 
-```text
 Android Developer Intern
+
+
+## 🖥️ Screenshots
+
+### 1. Login
+
+<img width="1917" height="1072" alt="Screenshot 2026-09-06 034829" src="https://github.com/user-attachments/assets/e008e39f-7407-4d5b-b60a-a167235982a6" />
+
+
+### 2. Interview Setup
+
+<img width="1902" height="1078" alt="Screenshot 2026-09-06 035004" src="https://github.com/user-attachments/assets/43877128-2582-4973-b11c-5eb9dd252681" />
+
+### 3. AI Interview Report
+
+<img width="1875" height="1081" alt="Screenshot 2026-09-06 035035" src="https://github.com/user-attachments/assets/a6c85024-2ec7-4358-bd67-140820f2dded" />
+
+
