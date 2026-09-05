@@ -1,44 +1,207 @@
-main{
-    min-height: 100vh;
-    width: 100%;
+.auth-page {
+  min-height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 91, 141, 0.2), transparent 28rem),
+    linear-gradient(135deg, #2a2727 0%, #171516 100%);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.auth-shell {
+  width: min(980px, 100%);
+  min-height: 590px;
+  display: grid;
+  grid-template-columns: 1fr 0.86fr;
+  overflow: hidden;
+  border: 1px solid #4a3b42;
+  border-radius: 1.25rem;
+  background: rgba(26, 23, 24, 0.92);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.32);
+}
 
+.auth-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(2rem, 5vw, 4rem);
+  background:
+    linear-gradient(145deg, rgba(255, 91, 141, 0.22), transparent 55%),
+    #211e20;
+}
 
-    .form-container{
-        min-width: 350px;
+.auth-logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: contain;
+  margin-bottom: 2.5rem;
+}
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+.auth-eyebrow {
+  color: #ff5b8d;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
 
-    form{
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
+.auth-intro h1 {
+  max-width: 450px;
+  margin-top: 1rem;
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
 
-    .input-group{
-        display: flex;
-        flex-direction: column;
+.auth-description {
+  max-width: 400px;
+  margin-top: 1.25rem;
+  color: #c8bfc3;
+  line-height: 1.55;
+}
 
-        gap: 0.5rem;
+.auth-note {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  color: #c8bfc3;
+  font-size: 0.85rem;
+}
 
+.auth-note span {
+  color: #ff5b8d;
+  font-weight: 800;
+}
 
-        input{
-            border: none;
-            outline: none;
-            padding-inline: 1rem;
-            padding-block: 0.75rem;
-            border-radius: 0.75rem;
-        }
-    }
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: #171516;
+}
 
-    a{
-        color: #e1034d;
-        text-decoration: none;
-    }
+.form-heading h2 {
+  margin-top: 0.65rem;
+  font-size: 2rem;
+}
+
+.form-heading > p:last-child {
+  margin-top: 0.5rem;
+  color: #9b8f95;
+  line-height: 1.45;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 2.25rem;
+}
+
+.form-container .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-container .input-group label {
+  color: #e8e0e3;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.form-container .input-group input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #44383d;
+  border-radius: 0.55rem;
+  outline: none;
+  background: #211e20;
+  color: #fff;
+  font: inherit;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-container .input-group input::placeholder {
+  color: #766a70;
+}
+
+.form-container .input-group input:focus {
+  border-color: #ff5b8d;
+  background: #2a2527;
+}
+
+.form-container .button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+  font-weight: 750;
+}
+
+.form-container .button span {
+  font-size: 1.2rem;
+}
+
+.form-container .button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.error-message {
+  color: #ff9ab4;
+  line-height: 1.4;
+}
+
+.auth-switch {
+  margin-top: 1.75rem;
+  color: #9b8f95;
+  font-size: 0.9rem;
+}
+
+.auth-switch a {
+  color: #ff5b8d;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+.auth-loading {
+  color: #ff5b8d;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .auth-page {
+    padding: 1rem;
+  }
+
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-intro {
+    min-height: 330px;
+    padding: 2rem;
+  }
+
+  .auth-logo {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .auth-note {
+    margin-top: 2rem;
+  }
+
+  .form-container {
+    padding: 2rem;
+  }
 }

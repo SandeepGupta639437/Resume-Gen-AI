@@ -24,29 +24,45 @@ const Login = () => {
   const navigate = useNavigate();
 
   if(loading) {
-    return (<main> <h1>Loading.....</h1></main>)
+    return <main className="auth-page"><div className="auth-loading">Checking your session...</div></main>
   }
 
   return (
-    <main>
-      <div className="form-container">
-        <h1>Login</h1>
-        <form onSubmit = {handleSubmit}>
+    <main className="auth-page">
+      <div className="auth-shell">
+        <section className="auth-intro">
+          <div>
+            <img className="auth-logo" src="/resume-ai-icon.png" alt="Interview Lab" />
+            <p className="auth-eyebrow">INTERVIEW LAB / AI PREP</p>
+            <h1>Walk into your next interview prepared.</h1>
+            <p className="auth-description">Your resume has the story. We help you find the questions, gaps, and preparation plan hiding inside it.</p>
+          </div>
+          <div className="auth-note"><span>01</span> Personalised preparation, built from your profile.</div>
+        </section>
+
+        <section className="form-container">
+          <div className="form-heading">
+            <p className="auth-eyebrow">WELCOME BACK</p>
+            <h2>Sign in to your lab</h2>
+            <p>Continue building your interview advantage.</p>
+          </div>
+          <form onSubmit = {handleSubmit}>
             <div className="input-group">
-                <label htmlFor="email">Email</label>
-                <input onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email" placeholder='email.com' required />
+              <label htmlFor="email">Email address</label>
+              <input onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email" placeholder='you@example.com' autoComplete="email" required />
             </div>
             <div className="input-group">
-                <label htmlFor="password">Password</label>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" placeholder='Enter your password' required />
+              <label htmlFor="password">Password</label>
+              <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" placeholder='Enter your password' autoComplete="current-password" required />
             </div>
-            <button className="button primary-button" type="submit">
-              Login
+            <button className="button primary-button" type="submit" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
+              {!loading && <span aria-hidden="true">-&gt;</span>}
             </button>
             {error && <p className="error-message">{error}</p>}
-        </form>
-
-        <p>Don't have an account? <Link to="/register">Register</Link></p>
+          </form>
+          <p className="auth-switch">Don't have an account? <Link to="/register">Create one</Link></p>
+        </section>
       </div>
     </main>
   )
