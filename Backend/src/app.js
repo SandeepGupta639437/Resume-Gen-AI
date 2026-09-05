@@ -7,9 +7,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://resume-gen-ai-phi.vercel.app",
   ...(process.env.CLIENT_URL || "").split(",")
-]
-  .split(",")
-  .map((origin) => origin.trim().replace(/\/$/, ""));
+].map((origin) => origin.trim().replace(/\/$/, ""));
 
 app.use(cors({
   origin(origin, callback) {
