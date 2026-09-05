@@ -1,4 +1,3 @@
-import React from 'react'
 import {useState} from "react"
 import "../auth.form.scss"
 import {useNavigate , Link} from "react-router"
@@ -9,11 +8,17 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleLogin(email,password);
-    navigate("/");
+    setError("");
+    const isLoggedIn = await handleLogin(email,password);
+    if (isLoggedIn) {
+      navigate("/");
+    } else {
+      setError("Login failed. Check your email and password, then try again.");
+    }
   }
 
   const navigate = useNavigate();
@@ -38,6 +43,7 @@ const Login = () => {
             <button className="button primary-button" type="submit">
               Login
             </button>
+            {error && <p className="error-message">{error}</p>}
         </form>
 
         <p>Don't have an account? <Link to="/register">Register</Link></p>

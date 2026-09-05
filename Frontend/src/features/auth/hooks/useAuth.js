@@ -12,9 +12,11 @@ export const useAuth = () => {
       setLoading(true)
       const data = await login(email,password)
       setUser(data.user)
+      return true
     }
-    catch(err){
+    catch{
       console.log(err)
+      return false
     }
     finally{
       setLoading(false)
@@ -59,7 +61,7 @@ export const useAuth = () => {
     }
 
     getAndSetUser()
-  }, [])
+  }, [setLoading, setUser])
 
   return {user, loading, handleLogin, handleRegister, handleLogout}
 }
