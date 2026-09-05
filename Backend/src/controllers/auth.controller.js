@@ -54,7 +54,7 @@ async function registerUserController(req, res) {
     id: newUser._id,
     username: newUser.username,
     email: newUser.email
-  } })
+  }, token })
 
 }
 
@@ -94,7 +94,8 @@ async function loginUserController(req, res) {
       id: user._id,
       username : user.username,
       email : user.email
-    }
+    },
+    token
   })
 
 }
@@ -107,7 +108,11 @@ async function loginUserController(req, res) {
  */
 
 async function logoutUserController(req,res) {
-  const token = req.cookies.token
+  const authorization = req.headers.authorization
+  const bearerToken = authorization?.startsWith("Bearer ")
+    ? authorization.slice(7)
+    : null
+  const token = req.cookies.token || bearerToken
 
   if(token){
     await tokenBlacklistModel.create({ token })

@@ -5,6 +5,14 @@ const api = axios.create({
   withCredentials: true,
 })
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken")
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
 export async function generateInterviewReport({ resume, jobDescription, selfDescription }) {
   const formData = new FormData()
   formData.append("resume", resume)

@@ -4,6 +4,14 @@ const api = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL || "http://localhost:3000"}/api/auth`,
   withCredentials: true,
 });
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken")
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
 // const API_URL = "http://localhost:5000";
 
 export async function register (username,email,password){

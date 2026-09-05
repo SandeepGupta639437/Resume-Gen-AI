@@ -3,7 +3,11 @@ const tokenBlacklistModel = require("../models/blacklist.model")
 
 
 async function authUser(req,res,next){
-  const token = req.cookies.token
+  const authorization = req.headers.authorization
+  const bearerToken = authorization?.startsWith("Bearer ")
+    ? authorization.slice(7)
+    : null
+  const token = req.cookies.token || bearerToken
 
   if(!token){
     return res.status(401).json({ message: "Access denied. No token provided." })
