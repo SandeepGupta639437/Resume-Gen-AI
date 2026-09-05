@@ -3,7 +3,11 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors');
 
 const app = express();
-const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://resume-gen-ai-phi.vercel.app",
+  ...(process.env.CLIENT_URL || "").split(",")
+]
   .split(",")
   .map((origin) => origin.trim().replace(/\/$/, ""));
 
