@@ -53,7 +53,7 @@ export const useAuth = () => {
       try {
         const data = await getMe()
         setUser(data.user)
-      } catch (err) {
+      } catch {
         setLoading(false)
       } finally {
         setLoading(false)
