@@ -60,6 +60,30 @@
   white-space: nowrap;
 }
 
+.heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logout-button {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: #c8bfc3;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  border-color: var(--accent);
+  background: rgba(255, 91, 141, 0.1);
+  color: #fff;
+}
+
 .heading-mark span {
   padding: 0 0.35rem;
   color: #6f6267;
@@ -328,6 +352,11 @@ textarea:focus {
   .report-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .heading-actions {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .interview-input-group,

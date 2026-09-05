@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import "../style/home.scss"
 import { generateInterviewReport } from "../services/interview.api.js"
+import { useAuth } from "../../auth/hooks/useAuth.js"
 
 const Home = () => {
+  const navigate = useNavigate()
+  const { handleLogout } = useAuth()
   const [jobDescription, setJobDescription] = useState("")
   const [selfDescription, setSelfDescription] = useState("")
   const [resume, setResume] = useState(null)
@@ -11,6 +15,11 @@ const Home = () => {
   const [isGenerating, setIsGenerating] = useState(false)
   const completedDetails = [jobDescription.trim(), resume, selfDescription.trim()]
     .filter(Boolean).length
+
+  async function handleSignOut() {
+    await handleLogout()
+    navigate("/login")
+  }
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -48,7 +57,10 @@ const Home = () => {
           <h1>Turn your resume into a sharper interview plan.</h1>
           <p className='heading-copy'>Share the role, your experience, and let AI map the questions you should prepare for.</p>
         </div>
-        <div className='heading-mark'>{String(completedDetails).padStart(2, "0")}<span>/</span>03</div>
+        <div className='heading-actions'>
+          <div className='heading-mark'>{String(completedDetails).padStart(2, "0")}<span>/</span>03</div>
+          <button className='logout-button' type='button' onClick={handleSignOut}>Log out</button>
+        </div>
       </header>
 
       <form className='interview-input-group' onSubmit={handleSubmit}>
