@@ -14,7 +14,7 @@ export const useAuth = () => {
       setUser(data.user)
       return true
     }
-    catch{
+    catch(err){
       console.log(err)
       return false
     }
