@@ -13,11 +13,18 @@ export const useAuth = () => {
       const data = await login(email,password)
       localStorage.setItem("authToken", data.token)
       setUser(data.user)
-      return true
+      return { success: true }
     }
     catch(err){
       console.log(err)
-      return false
+      return {
+        success: false,
+        message: err.response?.data?.message || (
+          err.request
+            ? "Cannot reach the server. Check the deployed API URL and CORS settings."
+            : err.message
+        )
+      }
     }
     finally{
       setLoading(false)

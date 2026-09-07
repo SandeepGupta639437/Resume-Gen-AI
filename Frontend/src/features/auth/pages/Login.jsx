@@ -13,11 +13,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    const isLoggedIn = await handleLogin(email,password);
-    if (isLoggedIn) {
+    const result = await handleLogin(email,password);
+    if (result.success) {
       navigate("/");
     } else {
-      setError("Login failed. Check your email and password, then try again.");
+      setError(result.message);
     }
   }
 

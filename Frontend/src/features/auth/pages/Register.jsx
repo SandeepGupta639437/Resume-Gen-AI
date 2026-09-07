@@ -24,9 +24,24 @@ const Register = () => {
 
 
   return (
-    <main>
-      <div className="form-container">
-        <h1>Register</h1>
+    <main className="auth-page">
+      <div className="auth-shell">
+        <section className="auth-intro">
+          <div>
+            <img className="auth-logo" src="/resume-ai-icon.png" alt="Interview Lab" />
+            <p className="auth-eyebrow">INTERVIEW LAB / AI PREP</p>
+            <h1>Build your interview advantage.</h1>
+            <p className="auth-description">Create your profile once. Turn your experience into focused preparation for what comes next.</p>
+          </div>
+          <div className="auth-note"><span>01</span> Your preparation starts with your story.</div>
+        </section>
+
+        <section className="form-container">
+          <div className="form-heading">
+            <p className="auth-eyebrow">GET STARTED</p>
+            <h2>Create your lab profile</h2>
+            <p>Save your preparation and pick up where you left off.</p>
+          </div>
         <form onSubmit = {handleSubmit}>
             <div className="input-group">
                 <label htmlFor="username">Username</label>
@@ -40,11 +55,13 @@ const Register = () => {
                 <label htmlFor="password">Password</label>
                 <input onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" placeholder='Enter your password' required />
             </div>
-            <button className="button primary-button" type="submit">
-              Register
+            <button className="button primary-button" type="submit" disabled={loading}>
+              {loading ? "Creating profile..." : "Create profile"}
+              {!loading && <span aria-hidden="true">-&gt;</span>}
             </button>
         </form>
-        <p>Already have an account? <Link to="/login">Login</Link></p>
+        <p className="auth-switch">Already have an account? <Link to="/login">Sign in</Link></p>
+        </section>
       </div>
     </main>
   )

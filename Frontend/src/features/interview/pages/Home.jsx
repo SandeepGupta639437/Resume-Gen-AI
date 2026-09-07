@@ -114,19 +114,21 @@ const Home = () => {
         <section className='report'>
           <div className='report-header'>
             <div>
-              <p className='highlight'>AI INTERVIEW REPORT</p>
+              <p className='eyebrow'>AI INTERVIEW REPORT</p>
               <h1>Your preparation roadmap</h1>
+              <p className='report-lede'>A focused set of prompts and priorities built from your target role and profile.</p>
             </div>
             <div className='match-score'>
+              <span className='score-label'>MATCH SCORE</span>
               <strong>{report.matchScore}%</strong>
               <span>Profile match</span>
             </div>
           </div>
 
           <div className='report-summary'>
-            <span><b>{report.technicalQuestions?.length || 0}</b> technical prompts</span>
-            <span><b>{report.behavioralQuestions?.length || 0}</b> behavioral prompts</span>
-            <span><b>{report.skillGaps?.length || 0}</b> focus areas</span>
+            <div className='summary-stat'><b>{report.technicalQuestions?.length || 0}</b><span>Technical prompts</span></div>
+            <div className='summary-stat'><b>{report.behavioralQuestions?.length || 0}</b><span>Behavioral prompts</span></div>
+            <div className='summary-stat'><b>{report.skillGaps?.length || 0}</b><span>Focus areas</span></div>
           </div>
 
           <div className='report-grid'>
@@ -136,7 +138,7 @@ const Home = () => {
 
           <div className='report-grid'>
             <div className='report-section'>
-              <h2>Skill Gaps</h2>
+              <div className='section-heading'><span className='section-kicker'>04</span><h2>Skill gaps</h2></div>
               {report.skillGaps?.map((gap) => (
                 <div className='skill-gap' key={gap.skill}>
                   <span>{gap.skill}</span>
@@ -145,10 +147,11 @@ const Home = () => {
               ))}
             </div>
             <div className='report-section'>
-              <h2>Preparation Plan</h2>
+              <div className='section-heading'><span className='section-kicker'>05</span><h2>Preparation plan</h2></div>
               {report.preparationPlan?.map((plan) => (
                 <div className='plan-day' key={plan.day}>
-                  <strong>Day {plan.day}: {plan.focus}</strong>
+                  <span className='day-label'>DAY {String(plan.day).padStart(2, '0')}</span>
+                  <strong>{plan.focus}</strong>
                   <ul>{plan.tasks?.map((task) => <li key={task}>{task}</li>)}</ul>
                 </div>
               ))}
@@ -163,12 +166,18 @@ const Home = () => {
 function ReportQuestions({ title, questions = [] }) {
   return (
     <div className='report-section'>
-      <h2>{title}</h2>
+      <div className='section-heading'>
+        <span className='section-kicker'>{title === 'Technical Questions' ? '01' : '02'}</span>
+        <div><h2>{title}</h2><p className='section-description'>{questions.length} prompts to rehearse</p></div>
+      </div>
       {questions.map((item, index) => (
         <article className='question' key={`${item.question}-${index}`}>
-          <h3>{item.question}</h3>
-          <p><b>Intent:</b> {item.intention}</p>
-          <p><b>Answer approach:</b> {item.answer}</p>
+          <div className='question-index'>{String(index + 1).padStart(2, '0')}</div>
+          <div className='question-content'>
+            <h3>{item.question}</h3>
+            <p><b>Intent</b>{item.intention}</p>
+            <p><b>Answer approach</b>{item.answer}</p>
+          </div>
         </article>
       ))}
     </div>
