@@ -13,6 +13,8 @@ async function generateInterViewReportController(req, res) {
         return res.status(400).json({ message: "Please upload a PDF resume." })
     }
 
+    let stage = "pdf"
+
     try {
         const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
         const { selfDescription, jobDescription } = req.body
@@ -21,12 +23,14 @@ async function generateInterViewReportController(req, res) {
             return res.status(400).json({ message: "Job description and your story are required." })
         }
 
+        stage = "ai"
         const interViewReportByAi = await generateInterviewReport({
             resume: resumeContent.text,
             selfDescription,
             jobDescription
         })
 
+        stage = "database"
         const interviewReport = await interviewReportModel.create({
             user: req.user.id,
             resume: resumeContent.text,
@@ -40,9 +44,12 @@ async function generateInterViewReportController(req, res) {
             interviewReport
         })
     } catch (error) {
-        console.error("Interview report generation failed:", error)
+        console.error(`Interview report failed during ${stage}:`, error)
         return res.status(502).json({
-            message: "The report service is temporarily unavailable. Please try again.",
+            message: stage === "ai"
+                ? "The AI report service is unavailable. Check the production Gemini API configuration."
+                : "The report service is temporarily unavailable. Please try again.",
+            code: `REPORT_${stage.toUpperCase()}_FAILED`,
             detail: process.env.NODE_ENV === "production" ? undefined : error.message
         })
     }
