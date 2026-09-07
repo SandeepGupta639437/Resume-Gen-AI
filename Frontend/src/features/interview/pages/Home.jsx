@@ -43,7 +43,9 @@ const Home = () => {
       const serverMessage = requestError.response?.data?.message
       setError(status === 401
         ? "Your session has expired. Please log in again before generating a report."
-        : serverMessage || "Unable to generate the interview report.")
+        : serverMessage || (requestError.request && !requestError.response
+          ? "The report service could not be reached. Please try again in a moment."
+          : "Unable to generate the interview report."))
     } finally {
       setIsGenerating(false)
     }

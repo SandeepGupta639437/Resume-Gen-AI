@@ -31,6 +31,9 @@ const interviewReportSchema = z.object({
 })
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
+    if (!process.env.GOOGLE_API_KEY) {
+        throw new Error("GOOGLE_API_KEY is not configured")
+    }
 
 
     const prompt = `Generate an interview report for a candidate with the following details:
